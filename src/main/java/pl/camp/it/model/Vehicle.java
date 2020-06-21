@@ -7,7 +7,6 @@ public class Vehicle {
     private String vin;
     private boolean rent;
 
-
     public Vehicle(int id, String brand, String model, String vin) {
         this.id = id;
         this.brand = brand;
@@ -16,6 +15,13 @@ public class Vehicle {
         this.rent = false;
     }
 
+    public Vehicle(int id, String brand, String model, String vin, boolean rent) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.vin = vin;
+        this.rent = rent;
+    }
 
     public int getId() {
         return this.id;

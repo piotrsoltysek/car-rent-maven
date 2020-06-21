@@ -2,9 +2,12 @@ package pl.camp.it.model;
 
 public class Car extends Vehicle {
 
-
     public Car(int id, String brand, String model, String vin) {
         super(id, brand, model, vin);
+    }
+
+    public Car(int id, String brand, String model, String vin, boolean rent) {
+        super(id, brand, model, vin, rent);
     }
 
     @Override
@@ -23,9 +26,3 @@ public class Car extends Vehicle {
                 .toString();
     }
 }
-
-
-
-
-
-

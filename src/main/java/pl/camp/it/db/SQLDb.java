@@ -2,6 +2,7 @@ package pl.camp.it.db;
 
 import pl.camp.it.model.Bus;
 import pl.camp.it.model.Car;
+import pl.camp.it.model.User;
 import pl.camp.it.model.Vehicle;
 
 import java.sql.*;
@@ -112,5 +113,36 @@ public class SQLDb {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static User getUserByLogin(String login) {
+        try {
+            Statement statement = connection.createStatement();
+
+            String sql = "SELECT * FROM tuser WHERE login = '" + login + "'";
+
+            ResultSet result = statement.executeQuery(sql);
+
+            if (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setLogin(result.getString("login"));
+                user.setPassword(result.getString("password"));
+                return user;
+            } else {
+                return null;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

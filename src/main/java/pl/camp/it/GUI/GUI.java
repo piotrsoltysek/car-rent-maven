@@ -1,8 +1,10 @@
 package pl.camp.it.GUI;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import pl.camp.it.db.Persistance;
 import pl.camp.it.db.SQLDb;
 import pl.camp.it.db.VehicleRepository;
+import pl.camp.it.model.User;
 import pl.camp.it.model.Vehicle;
 
 import java.util.Scanner;
@@ -29,7 +31,8 @@ public class GUI {
                 rentCar();
                 break;
             case "3":
-                Persistance.saveData();
+                //Persistance.saveData();
+                SQLDb.closeConnection();
                 System.exit(0);
             default:
                 System.out.println("Nieprawidłowy wybór !!");
@@ -69,5 +72,25 @@ public class GUI {
             }
         }
         showMainMenu();
+    }
+
+    public static void showLoginScreen() {
+        System.out.println("Podaj login:");
+        String login = scanner.nextLine();
+        System.out.println("Podaj hasło:");
+        String password = scanner.nextLine();
+
+        User userFromDataBase = SQLDb.getUserByLogin(login);
+        if (userFromDataBase == null) {
+            showLoginScreen();
+        } else {
+            String hashedPassword = DigestUtils.md5Hex(password);
+
+            if (hashedPassword.equals(userFromDataBase.getPassword())) {
+                showMainMenu();
+            } else {
+                showLoginScreen();
+            }
+        }
     }
 }

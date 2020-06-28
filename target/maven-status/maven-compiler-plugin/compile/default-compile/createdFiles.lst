@@ -1,7 +1,0 @@
-pl\camp\it\model\Vehicle.class
-pl\camp\it\GUI\GUI.class
-pl\camp\it\model\Car.class
-pl\camp\it\db\Persistance.class
-pl\camp\it\Main.class
-pl\camp\it\db\VehicleRepository.class
-pl\camp\it\model\Bus.class

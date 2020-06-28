@@ -80,7 +80,7 @@ public class GUI {
         System.out.println("Podaj hasło:");
         String password = scanner.nextLine();
 
-        User userFromDataBase = SQLDb.getUserByLogin(login);
+        User userFromDataBase = SQLDb.getUserByLoginWithPrepareStatement(login);
         if (userFromDataBase == null) {
             showLoginScreen();
         } else {

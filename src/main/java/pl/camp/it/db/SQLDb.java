@@ -145,4 +145,30 @@ public class SQLDb {
         }
         return null;
     }
+
+
+    public static User getUserByLoginWithPrepareStatement(String login) {
+        try {
+            String sql = "SELECT * FROM tuser WHERE login = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, login);
+
+            ResultSet result = preparedStatement.executeQuery();
+
+            if (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setLogin(result.getString("login"));
+                user.setPassword(result.getString("password"));
+                return user;
+            } else {
+                return null;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }

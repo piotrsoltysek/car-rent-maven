@@ -66,6 +66,35 @@ public class SQLDb {
         }
     }
 
+    public static void saveVehicleWithPrepareStatement(Vehicle vehicle) {
+        try {
+
+            String sql = "INSERT INTO tvehicle (brand, model, vin, rent, personsAmount, wheelsCount) VALUES (?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, vehicle.getBrand());
+            preparedStatement.setString(2, vehicle.getModel());
+            preparedStatement.setString(3, vehicle.getVin());
+            preparedStatement.setBoolean(4, vehicle.isRent());
+
+            if (vehicle instanceof Bus) {
+                Bus bus = (Bus) vehicle;
+                preparedStatement.setString(5, vehicle.getBrand());
+                preparedStatement.setString(6, vehicle.getBrand());
+            } else {
+                preparedStatement.setNull(5, Types.NULL);
+                preparedStatement.setNull(6, Types.NULL);
+            }
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
     public static List<Vehicle> getAllVehicles() {
         List<Vehicle> resultList = new ArrayList<>();
         try {

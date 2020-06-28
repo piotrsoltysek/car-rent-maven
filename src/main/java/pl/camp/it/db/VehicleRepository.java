@@ -8,12 +8,6 @@ public class VehicleRepository {
     private static final VehicleRepository vehicleRepository = new VehicleRepository();
 
 
-    /*
-    private VehicleRepository() {
-        Persistance.loadData(vehicles);
-    }
-    */
-
     public List<Vehicle> getVehicles() {
         return this.vehicles;
     }

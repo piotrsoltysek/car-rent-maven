@@ -34,6 +34,9 @@ public class Bus extends Vehicle {
                 .append("brand = ")
                 .append(this.getBrand())
                 .append("\n")
+                .append("model = ")
+                .append(this.getModel())
+                .append("\n")
                 .append("vin = ")
                 .append(this.getVin())
                 .append("\n")
@@ -42,6 +45,7 @@ public class Bus extends Vehicle {
                 .append("\n")
                 .append("wheelsCount = ")
                 .append(this.wheelsCount)
+                .append("\n")
                 .append("}")
                 .toString();
     }

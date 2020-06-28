@@ -20,8 +20,12 @@ public class Car extends Vehicle {
                 .append("brand = ")
                 .append(this.getBrand())
                 .append("\n")
+                .append("model = ")
+                .append(this.getModel())
+                .append("\n")
                 .append("vin = ")
                 .append(this.getVin())
+                .append("\n")
                 .append("}")
                 .toString();
     }

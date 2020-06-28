@@ -42,7 +42,6 @@ public class SQLDb {
                     .append(vehicle.getVin())
                     .append("', ")
                     .append(vehicle.isRent());
-            // TODO: 2020-06-28 Sprawdzić czy działa automatyczne dodawanie null dla Car
                     if (vehicle instanceof Bus) {
                         Bus temp = (Bus) vehicle;
                         sql
@@ -50,6 +49,12 @@ public class SQLDb {
                                 .append(temp.getPersonsAmount())
                                 .append(", ")
                                 .append(temp.getWheelsCount());
+                    } else {
+                        sql
+                                .append(", ")
+                                .append("NULL")
+                                .append(", ")
+                                .append("NULL");
                     }
                     sql.append(")");
 
@@ -73,11 +78,11 @@ public class SQLDb {
                 String model = wyniki.getString("model");
                 String vin = wyniki.getString("vin");
                 boolean rent = wyniki.getBoolean("rent");
-                // TODO: 2020-06-28 Sprawdzić co się stanie jak w bazie będzie null
+
                 Integer personsAmount = wyniki.getInt("personsAmount");
                 Integer wheelsCount = wyniki.getInt("wheelsCount");
 
-                if (personsAmount == null) {
+                if (wyniki.wasNull()) {
                     resultList.add(new Car(id, brand, model, vin, rent));
                 } else {
                     resultList.add(new Bus(id, brand, model, vin, rent, personsAmount, wheelsCount));
@@ -88,6 +93,24 @@ public class SQLDb {
             throwables.printStackTrace();
         }
         return resultList;
+    }
 
+
+    public static void updateVehicleRent(Vehicle vehicle) {
+        try {
+            Statement statement = connection.createStatement();
+
+            StringBuilder sql = new StringBuilder();
+            sql
+                    .append("UPDATE tvehicle SET rent = ")
+                    .append(vehicle.isRent())
+                    .append(" WHERE id = ")
+                    .append(vehicle.getId());
+            // TODO: 2020-06-28 Czy działa kwerenda bez średnika
+
+            statement.executeUpdate(sql.toString());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

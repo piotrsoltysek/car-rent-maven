@@ -1,7 +1,6 @@
 package pl.camp.it.GUI;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import pl.camp.it.db.Persistance;
 import pl.camp.it.db.SQLDb;
 import pl.camp.it.db.VehicleRepository;
 import pl.camp.it.model.User;
